@@ -1,0 +1,25 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-minitest
+  - rubocop-capybara
+
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'log/**/*'
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Naming/MethodParameterName:
+  MinNameLength: 1
+
+Style/CommentedKeyword:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
