@@ -8,6 +8,7 @@ AllCops:
   Exclude:
     - 'bin/**/*'
     - 'log/**/*'
+    - 'db/schema.rb'
 
 Bundler/OrderedGems:
   Enabled: false
