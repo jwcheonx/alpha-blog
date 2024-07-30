@@ -5,12 +5,14 @@
     <thead>
     <tr>
       <th>Title</th>
+      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
     <% @articles.each do |a| %>
       <tr>
         <td><%= a.title %></td>
+        <td><%= link_to 'View', a %></td>
       </tr>
     <% end %>
     </tbody>
