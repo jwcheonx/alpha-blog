@@ -1,0 +1,18 @@
+<h1>Articles</h1>
+
+<% if @articles.any? %>
+  <table>
+    <thead>
+    <tr>
+      <th>Title</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @articles.each do |a| %>
+      <tr>
+        <td><%= a.title %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
