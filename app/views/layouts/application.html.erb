@@ -12,6 +12,9 @@
   <body>
     <%= render 'layouts/navigation' %>
     <div>
+      <% flash.each do |_, msg| %>
+        <%= msg %>
+      <% end %>
       <%= yield %>
     </div>
   </body>
