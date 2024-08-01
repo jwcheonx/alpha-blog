@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_27_053826) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_02_034434) do
   create_table "articles", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username", null: false, collation: "NOCASE"
+    t.string "email", null: false, collation: "NOCASE"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "ux_users_email", unique: true
+    t.index ["username"], name: "ux_users_username", unique: true
   end
 
 end
