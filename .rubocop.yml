@@ -13,6 +13,9 @@ AllCops:
 Bundler/OrderedGems:
   Enabled: false
 
+Layout/LineLength:
+  Max: 100
+
 Naming/MethodParameterName:
   MinNameLength: 1
 
