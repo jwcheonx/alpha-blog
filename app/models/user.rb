@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :articles, inverse_of: :author, dependent: :destroy
+
   validates :username,
             presence: true,
             uniqueness: { case_sensitive: false },
