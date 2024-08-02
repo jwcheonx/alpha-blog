@@ -14,7 +14,10 @@ class ArticlesController < ApplicationController
   def edit; end
 
   def create
-    @article = Article.new(article_params)
+    @article = Article.new(article_params) do |a|
+      a.author_id = User.order(:id).pick(:id)
+    end
+
     if @article.save
       redirect_to @article, notice: 'Article created'
     else
