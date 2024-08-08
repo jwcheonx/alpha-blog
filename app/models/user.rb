@@ -11,6 +11,8 @@ class User < ApplicationRecord
             length: { maximum: 105 },
             format: URI::MailTo::EMAIL_REGEXP
 
+  has_secure_password
+
   before_save :downcase_email
 
   private
