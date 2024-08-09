@@ -1,0 +1,8 @@
+<% if @user.errors.any? %>
+  <h2>Could not sign up due to the following errors:</h2>
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>

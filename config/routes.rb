@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   get 'about' => 'pages#about'
 
   resources :articles
+
+  get 'signup' => 'users#new'
+  resources :users, only: :create
 end
