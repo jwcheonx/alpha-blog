@@ -1,9 +1,17 @@
 <% if @articles.any? %>
+  <% unless controller_name == 'articles' %>
+    <h2>Articles</h2>
+  <% end %>
+
   <table>
     <thead>
     <tr>
       <th>Title</th>
-      <th>Author</th>
+
+      <% unless can_infer_author? %>
+        <th>Author</th>
+      <% end %>
+
       <th>Date created</th>
       <th colspan='3'>Actions</th>
     </tr>

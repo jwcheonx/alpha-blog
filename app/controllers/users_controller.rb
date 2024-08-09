@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edit update]
+  before_action :set_user, only: %i[show edit update]
+
+  def show
+    @articles = @user.articles
+  end
 
   def new
     @user = User.new
@@ -10,8 +14,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to articles_path,
-                  status: :see_other,
+      redirect_to @user,
                   notice:
                     "Welcome to the Alpha Blog, #{@user.username}. You've successfully signed up."
     else
@@ -21,7 +24,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to articles_path, status: :see_other, notice: 'Account information updated'
+      redirect_to @user, notice: 'Account information updated'
     else
       render :edit, status: :unprocessable_content
     end
