@@ -10,20 +10,7 @@
     </tr>
     </thead>
     <tbody>
-    <% @articles.each do |a| %>
-      <tr>
-        <td><%= a.title %></td>
-        <td><%= a.author.username %></td>
-        <td><%= link_to 'View', a %></td>
-        <td><%= link_to 'Edit', edit_article_path(a) %></td>
-        <td>
-          <%= link_to 'Delete', a, data: {
-            turbo_method: :delete,
-            turbo_confirm: 'Are you sure you want to delete this article?'
-          } %>
-        </td>
-      </tr>
-    <% end %>
+    <%= render @articles %>
     </tbody>
   </table>
 <% end %>
