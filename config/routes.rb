@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   resources :articles
 
   get 'signup' => 'users#new'
-  resources :users, only: :create
+  resources :users, only: %i[edit create update]
 end

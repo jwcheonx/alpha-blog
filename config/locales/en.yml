@@ -32,3 +32,4 @@ en:
     submit:
       user:
         create: 'Sign up'
+        update: 'Update account'
