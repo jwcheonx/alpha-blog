@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include Pagy::Backend
+
   before_action :set_user, only: %i[show edit update]
 
   def index
@@ -6,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @articles = @user.articles
+    @pagy, @articles = pagy(@user.articles)
   end
 
   def new
