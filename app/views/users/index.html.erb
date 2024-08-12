@@ -1,0 +1,18 @@
+<h1>Bloggers</h1>
+
+<% if @users.any? %>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Date joined</th>
+      <th>Articles count</th>
+      <th colspan='2'>Profile</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= render @users %>
+    </tbody>
+  </table>
+<% end %>
