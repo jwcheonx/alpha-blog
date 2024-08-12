@@ -1,7 +1,7 @@
 <h1><%= @article.title %></h1>
 <p><%= @article.description %></p>
 <hr>
-<p>Authored by <%= @article.author.username %></p>
+<p>Authored by <%= link_to @article.author.username, @article.author %></p>
 <p>
   Created <%= time_ago_in_words(@article.created_at) %> ago,
   edited <%= time_ago_in_words(@article.updated_at) %> ago
