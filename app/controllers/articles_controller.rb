@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params) do |a|
-      a.author_id = User.order(:id).pick(:id)
+      a.author_id = current_user.id
     end
 
     if @article.save
