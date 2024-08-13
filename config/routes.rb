@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   resources :users, only: %i[index show edit create update]
 
   get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
 end
