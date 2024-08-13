@@ -12,4 +12,6 @@ Rails.application.routes.draw do
 
   get 'signup' => 'users#new'
   resources :users, only: %i[index show edit create update]
+
+  get 'login' => 'sessions#new'
 end
