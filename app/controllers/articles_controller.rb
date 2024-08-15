@@ -2,7 +2,8 @@ class ArticlesController < ApplicationController
   include Pagy::Backend
 
   before_action :require_login, only: %i[new edit create update destroy]
-  before_action :set_article, only: %i[show edit update]
+  before_action :set_article, only: %i[show edit update destroy]
+  before_action :authorize, only: %i[edit update destroy]
 
   def index
     @pagy, @articles = pagy(Article.all)
@@ -37,8 +38,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    Article.destroy!(params[:id])
-    redirect_to articles_path, status: :see_other, notice: 'Article deleted'
+    @article.destroy!
+    redirect_to current_user, status: :see_other, notice: 'Article deleted'
   end
 
   private
@@ -49,5 +50,11 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :description)
+  end
+
+  def authorize
+    return if @article.author_id == current_user.id
+
+    redirect_to @article, alert: "Cannot edit or delete other users' articles"
   end
 end

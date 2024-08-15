@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   before_action :require_login, only: %i[edit update]
   before_action :set_user, only: %i[show edit update]
+  before_action :authorize, only: %i[edit update]
 
   def index
     @pagy, @users = pagy(User.all)
@@ -46,5 +47,11 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:username, :email, :password)
+  end
+
+  def authorize
+    return if @user == current_user
+
+    redirect_to @user, alert: "Cannot edit other users' profiles"
   end
 end
