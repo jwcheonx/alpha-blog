@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   include Pagy::Backend
 
+  before_action :require_login, only: %i[new edit create update destroy]
   before_action :set_article, only: %i[show edit update]
 
   def index

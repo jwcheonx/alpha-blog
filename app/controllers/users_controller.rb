@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   include Pagy::Backend
 
+  before_action :require_login, only: %i[edit update]
   before_action :set_user, only: %i[show edit update]
 
   def index

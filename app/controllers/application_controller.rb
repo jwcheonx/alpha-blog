@@ -10,4 +10,10 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !!current_user
   end
+
+  def require_login
+    return if logged_in?
+
+    redirect_to login_path, alert: 'Log in to perform the requested action'
+  end
 end
