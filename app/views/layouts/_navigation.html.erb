@@ -2,10 +2,14 @@
   <ul>
     <li><%= link_to 'Home', root_path %></li>
     <li><%= link_to 'About', about_path %></li>
+
     <li>
-      <%= link_to 'Create new article', new_article_path %> |
+      <% if logged_in? %>
+        <%= link_to 'Create new article', new_article_path %> |
+      <% end %>
       <%= link_to 'Articles', articles_path %>
     </li>
+
     <li><%= link_to 'Bloggers', users_path %></li>
 
     <li>
