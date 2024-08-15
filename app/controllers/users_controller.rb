@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   include Pagy::Backend
 
   before_action :require_login, only: %i[edit update]
-  before_action :set_user, only: %i[show edit update]
-  before_action :authorize, only: %i[edit update]
+  before_action :set_user, only: %i[show edit update destroy]
+  before_action :authorize, only: %i[edit update destroy]
 
   def index
     @pagy, @users = pagy(User.all)
@@ -39,6 +39,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user.destroy!
+
+    session[:user_id] = nil
+    redirect_to root_path, notice: 'Account deleted'
+  end
+
   private
 
   def set_user
@@ -52,6 +59,6 @@ class UsersController < ApplicationController
   def authorize
     return if @user == current_user
 
-    redirect_to @user, alert: "Cannot edit other users' profiles"
+    redirect_to @user, alert: "Cannot edit or delete other users' profiles"
   end
 end
