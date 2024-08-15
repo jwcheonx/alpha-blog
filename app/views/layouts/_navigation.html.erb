@@ -2,6 +2,9 @@
   <ul>
     <li><%= link_to 'Home', root_path %></li>
     <li><%= link_to 'About', about_path %></li>
-    <li><%= link_to 'Articles', articles_path %></li>
+    <li>
+      <%= link_to 'Create new article', new_article_path %> |
+      <%= link_to 'Articles', articles_path %>
+    </li>
   </ul>
 </nav>
