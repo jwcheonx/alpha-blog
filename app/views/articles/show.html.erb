@@ -7,7 +7,7 @@
   edited <%= time_ago_in_words(@article.updated_at) %> ago
 </p>
 
-<% if logged_in? && @article.author_id == current_user.id %>
+<% if logged_in? && (@article.author_id == current_user.id || current_user.admin?) %>
   <%= link_to 'Edit', edit_article_path(@article) %> |
   <%= link_to 'Delete', @article, data: {
     turbo_method: :delete,
