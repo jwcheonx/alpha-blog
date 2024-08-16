@@ -2,13 +2,13 @@
 
 <%= render 'articles/table' %>
 
-<% if logged_in? && @user == current_user %>
+<% if logged_in? && (@user == current_user || current_user.admin?) %>
   <p>
     <%= link_to 'Edit profile', edit_user_path(@user) %> |
     <%= link_to 'Delete account', @user, data: {
       turbo_method: :delete,
       turbo_confirm:
-        'Are you sure you want to delete your account? All your articles will be deleted as well.'
+        'Are you sure you want to delete this account? All the articles will be deleted as well.'
     } %>
   </p>
 <% end %>
