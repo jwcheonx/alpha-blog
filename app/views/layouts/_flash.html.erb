@@ -1,3 +1,7 @@
-<% flash.each do |_, msg| %>
-  <%= msg %>
+<% flash.each do |type, msg| %>
+  <% if type == 'alert' %>
+    <span style='color: red;'><%= msg %></span>
+  <% else %>
+    <span style='color: green;'><%= msg %></span>
+  <% end %>
 <% end %>
