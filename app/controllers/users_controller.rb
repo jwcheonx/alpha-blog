@@ -42,7 +42,8 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy!
 
-    session[:user_id] = nil
+    # Administrator who deletes other user's account will remain logged in.
+    session[:user_id] = nil if @user == current_user
     redirect_to root_path, notice: 'Account deleted'
   end
 
@@ -57,7 +58,7 @@ class UsersController < ApplicationController
   end
 
   def authorize
-    return if @user == current_user
+    return if @user == current_user || (current_user.admin? && action_name == 'destroy')
 
     redirect_to @user, alert: "Cannot edit or delete other users' profiles"
   end
