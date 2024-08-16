@@ -53,7 +53,7 @@ class ArticlesController < ApplicationController
   end
 
   def authorize
-    return if @article.author_id == current_user.id
+    return if @article.author_id == current_user.id || current_user.admin?
 
     redirect_to @article, alert: "Cannot edit or delete other users' articles"
   end
