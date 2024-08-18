@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   resources :articles
 
+  resources :categories, only: %i[index show new]
+
   get 'signup' => 'users#new'
   resources :users, except: :new
 
