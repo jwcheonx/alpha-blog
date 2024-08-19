@@ -1,8 +1,10 @@
 class CategoriesController < ApplicationController
+  include Pagy::Backend
+
   before_action :set_category, only: :show
 
   def index
-    @categories = Category.all
+    @pagy, @categories = pagy(Category.all)
   end
 
   def show; end
