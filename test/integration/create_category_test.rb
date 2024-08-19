@@ -12,4 +12,15 @@ class CreateCategoryTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select 'h1', 'Category: Sports'
   end
+
+  test 'should reject creation of invalid category' do
+    get new_category_path
+    assert_response :success
+
+    assert_no_difference(-> { Category.count }) do
+      post categories_path, params: { category: { name: ' ' } }
+    end
+
+    assert_select 'h2', /Could not save the category/
+  end
 end
