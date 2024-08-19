@@ -1,7 +1,9 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: :show
 
-  def index; end
+  def index
+    @categories = Category.all
+  end
 
   def show; end
 
