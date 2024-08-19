@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
   include Pagy::Backend
 
+  before_action :require_login, :authorize, only: %i[new create]
   before_action :set_category, only: :show
 
   def index
@@ -30,5 +31,11 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.require(:category).permit(:name)
+  end
+
+  def authorize
+    return if current_user.admin?
+
+    redirect_to categories_path, alert: 'Administrator account required'
   end
 end
