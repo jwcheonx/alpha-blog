@@ -10,6 +10,13 @@
       <%= link_to 'Articles', articles_path %>
     </li>
 
+    <li>
+      <% if logged_in? && current_user.admin? %>
+        <%= link_to 'Create new category', new_category_path %> |
+      <% end %>
+      <%= link_to 'Categories', categories_path %>
+    </li>
+
     <li><%= link_to 'Bloggers', users_path %></li>
 
     <li>
