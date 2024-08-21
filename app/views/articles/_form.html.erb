@@ -8,6 +8,10 @@
     <%= f.text_area :description %>
   </p>
   <p>
+    <%= f.label "#{:categories} (select zero or more)" %><br>
+    <%= f.collection_select :category_ids, Category.all, :id, :name, multiple: true, size: 3 %>
+  </p>
+  <p>
     <%= f.submit %>
   </p>
 <% end %>
