@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_21_045928) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_21_051842) do
   create_table "articles", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
@@ -27,6 +27,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_21_045928) do
     t.index ["name"], name: "ux_categories_name", unique: true
   end
 
+  create_table "categorizations", force: :cascade do |t|
+    t.integer "article_id", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id", "category_id"], name: "ux_categorizations_article_id_category_id", unique: true
+    t.index ["category_id", "article_id"], name: "ux_categorizations_category_id_article_id", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username", null: false, collation: "NOCASE"
     t.string "email", null: false, collation: "NOCASE"
@@ -39,4 +48,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_21_045928) do
   end
 
   add_foreign_key "articles", "users", column: "author_id", on_delete: :cascade
+  add_foreign_key "categorizations", "articles", on_delete: :cascade
+  add_foreign_key "categorizations", "categories", on_delete: :cascade
 end
