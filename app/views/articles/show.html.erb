@@ -2,6 +2,9 @@
 <p><%= @article.description %></p>
 <hr>
 <p>Authored by <%= link_to @article.author.username, @article.author %></p>
+<% if @article.categories.any? %>
+  <p>Categories: <%= render 'categories/joined', categories: @article.categories %></p>
+<% end %>
 <p>
   Created <%= time_ago_in_words(@article.created_at) %> ago,
   edited <%= time_ago_in_words(@article.updated_at) %> ago

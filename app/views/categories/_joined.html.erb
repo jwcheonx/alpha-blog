@@ -1,0 +1,5 @@
+<% *rest, last = categories %>
+<% rest.each do |c| %>
+  <%= link_to c.name, c %>,
+<% end %>
+<%= link_to last.name, last if last %>
