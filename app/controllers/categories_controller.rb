@@ -8,7 +8,9 @@ class CategoriesController < ApplicationController
     @pagy, @categories = pagy(Category.all)
   end
 
-  def show; end
+  def show
+    @pagy, @articles = pagy(@category.articles)
+  end
 
   def new
     @category = Category.new
