@@ -1,8 +1,8 @@
 class CategoriesController < ApplicationController
   include Pagy::Backend
 
-  before_action :require_login, :authorize, only: %i[new create]
-  before_action :set_category, only: :show
+  before_action :require_login, :authorize, only: %i[new edit create update]
+  before_action :set_category, only: %i[show edit update]
 
   def index
     @pagy, @categories = pagy(Category.all)
@@ -16,12 +16,22 @@ class CategoriesController < ApplicationController
     @category = Category.new
   end
 
+  def edit; end
+
   def create
     @category = Category.new(category_params)
     if @category.save
       redirect_to @category, notice: 'Category created'
     else
       render :new, status: :unprocessable_content
+    end
+  end
+
+  def update
+    if @category.update(category_params)
+      redirect_to @category, notice: 'Category updated'
+    else
+      render :edit, status: :unprocessable_content
     end
   end
 

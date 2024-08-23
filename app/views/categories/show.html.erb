@@ -1,3 +1,7 @@
 <h1>Category: <%= @category.name %></h1>
 
 <%= render 'articles/table' %>
+
+<% if logged_in? && current_user.admin? %>
+  <p><%= link_to 'Rename category', edit_category_path(@category) %></p>
+<% end %>
