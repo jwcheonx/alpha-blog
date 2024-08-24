@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_21_051842) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_24_024216) do
   create_table "articles", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
@@ -36,6 +36,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_21_051842) do
     t.index ["category_id", "article_id"], name: "ux_categorizations_category_id_article_id", unique: true
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.text "body", null: false
+    t.integer "article_id", null: false
+    t.integer "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "fx_comments_article_id"
+    t.index ["author_id"], name: "fx_comments_author_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username", null: false, collation: "NOCASE"
     t.string "email", null: false, collation: "NOCASE"
@@ -50,4 +60,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_21_051842) do
   add_foreign_key "articles", "users", column: "author_id", on_delete: :cascade
   add_foreign_key "categorizations", "articles", on_delete: :cascade
   add_foreign_key "categorizations", "categories", on_delete: :cascade
+  add_foreign_key "comments", "articles", on_delete: :cascade
+  add_foreign_key "comments", "users", column: "author_id", on_delete: :cascade
 end
