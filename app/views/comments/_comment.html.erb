@@ -1,0 +1,8 @@
+<p>
+  <span style='color: gray;'>
+    <%= comment.author.username %> <%= time_ago_in_words(comment.created_at) %> ago
+  </span>
+  <span style='white-space: pre-line;'>
+    <%= comment.body %>
+  </span>
+</p>
