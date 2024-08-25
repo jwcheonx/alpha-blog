@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   before_action :authorize, only: %i[edit update destroy]
 
   def index
-    @pagy, @articles = pagy(Article.all)
+    @pagy, @articles = pagy(Article.preload(:author, :categories))
   end
 
   def show
