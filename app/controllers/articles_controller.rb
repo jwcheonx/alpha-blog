@@ -10,7 +10,10 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @pagy, @comments = pagy(@article.comments)
+    # @article = Article.preload(comments: :author).find(params[:id])
+    # @pagy, @comments = pagy(@article.comments)
+
+    @pagy, @comments = pagy(@article.comments.preload(:author))
   end
 
   def new
