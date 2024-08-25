@@ -28,3 +28,7 @@
   <%= render @comments %>
   <%== pagy_nav(@pagy) %>
 <% end %>
+
+<% if logged_in? %>
+  <%= render 'comments/form' %>
+<% end %>

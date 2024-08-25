@@ -1,0 +1,8 @@
+<%= form_with model: [@article, @article.comments.new] do |f| %>
+  <p style='margin-top: 2em;'>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit 'Add comment' %>
+  </p>
+<% end %>

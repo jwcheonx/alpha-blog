@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   root 'pages#home'
   get 'about' => 'pages#about'
 
-  resources :articles
+  resources :articles do
+    resources :comments, only: :create
+  end
 
   resources :categories, only: %i[index show new edit create update]
 
