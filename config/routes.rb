@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'about' => 'pages#about'
 
   resources :articles do
-    resources :comments, only: :create
+    resources :comments, only: %i[create destroy]
   end
 
   resources :categories, only: %i[index show new edit create update]
