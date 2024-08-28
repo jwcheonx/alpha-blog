@@ -9,7 +9,9 @@ class ArticlesController < ApplicationController
     @pagy, @articles = pagy(Article.all)
   end
 
-  def show; end
+  def show
+    @pagy, @comments = pagy(@article.comments.order(created_at: :desc))
+  end
 
   def new
     @article = Article.new

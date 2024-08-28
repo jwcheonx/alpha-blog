@@ -24,4 +24,7 @@
 
 <hr>
 
-<%= render @article.comments.order(created_at: :desc) %>
+<% if @comments.any? %>
+  <%= render @comments %>
+  <%== pagy_nav(@pagy) %>
+<% end %>
