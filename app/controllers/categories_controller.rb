@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @pagy, @articles = pagy(@category.articles)
+    @pagy, @articles = pagy(@category.articles.preload(:author, :categories))
   end
 
   def new
