@@ -1,7 +1,7 @@
 class Article < ApplicationRecord
   belongs_to :author, class_name: 'User', inverse_of: :articles
 
-  has_many :comments, dependent: :destroy
+  has_many :comments, -> { order(created_at: :desc) }, inverse_of: :article, dependent: :destroy
 
   has_many :categorizations, dependent: :destroy
   has_many :categories, through: :categorizations

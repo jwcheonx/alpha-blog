@@ -10,7 +10,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @pagy, @comments = pagy(@article.comments.order(created_at: :desc))
+    @pagy, @comments = pagy(@article.comments)
   end
 
   def new
