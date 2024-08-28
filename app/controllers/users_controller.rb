@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @pagy, @articles = pagy(@user.articles)
+    @pagy, @articles = pagy(@user.articles.preload(:categories))
   end
 
   def new
