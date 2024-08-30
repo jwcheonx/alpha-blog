@@ -16,6 +16,10 @@ class User < ApplicationRecord
 
   before_save :downcase_email
 
+  def admin?
+    is_admin?
+  end
+
   private
 
   def downcase_email

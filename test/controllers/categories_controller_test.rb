@@ -4,7 +4,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @category = Category.create!(name: 'Sports')
     @admin = User.create!(
-      username: 'johndoe', email: 'jdoe@example.org', password: 'password', admin: true
+      username: 'johndoe', email: 'jdoe@example.org', password: 'password', is_admin: true
     )
   end
 
