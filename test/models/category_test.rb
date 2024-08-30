@@ -15,7 +15,7 @@ class CategoryTest < ActiveSupport::TestCase
   end
 
   test 'name should be unique' do
-    @category.save
+    @category.save!
     assert_not @category.dup.valid?
   end
 

@@ -19,6 +19,9 @@ Layout/LineLength:
 Naming/MethodParameterName:
   MinNameLength: 1
 
+Rails/SaveBang:
+  Enabled: true
+
 Style/CommentedKeyword:
   Enabled: false
 
