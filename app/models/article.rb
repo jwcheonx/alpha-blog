@@ -8,4 +8,10 @@ class Article < ApplicationRecord
 
   validates :title, presence: true, length: 6..100
   validates :description, presence: true, length: 10..300
+
+  scope :published, -> { where(published_at: ..Time.current) }
+
+  def published?
+    published_at && published_at <= Time.current
+  end
 end

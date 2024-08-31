@@ -6,12 +6,14 @@ class ArticlesController < ApplicationController
   before_action :authorize, only: %i[edit update destroy]
 
   def index
-    @pagy, @articles = pagy(Article.preload(:author, :categories))
+    @pagy, @articles = pagy(Article.preload(:author, :categories).published)
   end
 
   def show
-    # @article = Article.preload(comments: :author).find(params[:id])
-    # @pagy, @comments = pagy(@article.comments)
+    unless @article.published?
+      require_login and return
+      authorize and return
+    end
 
     @pagy, @comments = pagy(@article.comments.preload(:author))
   end
@@ -60,6 +62,11 @@ class ArticlesController < ApplicationController
   def authorize
     return if @article.author_id == current_user.id || current_user.admin?
 
-    redirect_to @article, alert: "Cannot edit or delete other users' articles"
+    flash.alert = if action_name == 'show'
+                    "Cannot view other users' unpublished articles"
+                  else
+                    "Cannot edit or delete other users' articles"
+                  end
+    redirect_back_or_to root_path
   end
 end
