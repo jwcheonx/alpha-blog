@@ -7,6 +7,7 @@
 <% if @article.categories.any? %>
   <p>Categories: <%= render 'categories/joined', categories: @article.categories %></p>
 <% end %>
+<p>Publish date: <%= @article.published_at || 'saved as a draft' %></p>
 <p>
   Created <%= time_ago_in_words(@article.created_at) %> ago,
   edited <%= time_ago_in_words(@article.updated_at) %> ago
