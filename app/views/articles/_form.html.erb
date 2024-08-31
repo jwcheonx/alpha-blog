@@ -12,6 +12,14 @@
     <%= f.collection_select :category_ids, Category.all, :id, :name, multiple: true, size: 3 %>
   </p>
   <p>
+    <%= f.label 'Publish date (leave it blank to save as a draft)' %><br>
+    <% if @article.new_record? %>
+      <%= f.datetime_select :published_at, include_blank: true, selected: Time.current %>
+    <% else %>
+      <%= f.datetime_select :published_at, include_blank: true %>
+    <% end %>
+  </p>
+  <p>
     <%= f.submit %>
   </p>
 <% end %>
