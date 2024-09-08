@@ -14,9 +14,10 @@ class UsersController < ApplicationController
 
     @pagy, @articles = pagy(
       if logged_in? && (@user == current_user || current_user.admin?)
-        articles
+        # Drafts come first, scheduled articles second, and published articles last.
+        articles.order(Article.arel_table[:published_at].desc.nulls_first)
       else
-        articles.published
+        articles.published.order(published_at: :desc)
       end
     )
   end
