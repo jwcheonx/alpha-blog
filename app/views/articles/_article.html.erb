@@ -6,7 +6,15 @@
   <% end %>
 
   <td><%= render 'categories/joined', categories: article.categories %></td>
-  <td><%= time_ago_in_words(article.created_at) %> ago</td>
+  <td>
+    <% if article.draft? %>
+      Draft
+    <% elsif article.published? %>
+      <%= time_ago_in_words(article.published_at) %> ago
+    <% else %>
+      Scheduled
+    <% end %>
+  </td>
 
   <td><%= link_to 'View', article %></td>
   <% authorized = logged_in? && (article.author_id == current_user.id || current_user.admin?) %>

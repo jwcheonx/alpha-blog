@@ -11,6 +11,10 @@ class Article < ApplicationRecord
 
   scope :published, -> { where(published_at: ..Time.current) }
 
+  def draft?
+    !published_at
+  end
+
   def published?
     published_at && published_at <= Time.current
   end
