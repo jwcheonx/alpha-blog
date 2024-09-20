@@ -16,6 +16,9 @@ Bundler/OrderedGems:
 Layout/LineLength:
   Max: 100
 
+Metrics/AbcSize:
+  CountRepeatedAttributes: false
+
 Naming/MethodParameterName:
   MinNameLength: 1
 
