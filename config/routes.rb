@@ -13,6 +13,10 @@ Rails.application.routes.draw do
       get 'trashed', action: :list_trashed
     end
 
+    member do
+      patch 'restore'
+    end
+
     resources :comments, only: %i[create destroy]
   end
 

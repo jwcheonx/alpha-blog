@@ -1,9 +1,9 @@
 class ArticlesController < ApplicationController
   include Pagy::Backend
 
-  before_action :require_login, only: %i[new edit create update destroy list_trashed]
-  before_action :set_article, only: %i[show edit update destroy]
-  before_action :authorize, only: %i[edit update destroy]
+  before_action :require_login, only: %i[new edit create update destroy restore list_trashed]
+  before_action :set_article, only: %i[show edit update destroy restore]
+  before_action :authorize, only: %i[edit update destroy restore]
 
   def index
     @pagy, @articles = pagy(
@@ -49,8 +49,15 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article.destroy!
-    redirect_to current_user, status: :see_other, notice: 'Article deleted'
+    @article.discard || @article.destroy!
+
+    flash.notice = 'Article moved to trash' if @article.persisted?
+    redirect_to current_user, status: :see_other
+  end
+
+  def restore
+    @article.undiscard!
+    redirect_to current_user, notice: 'Article restored'
   end
 
   def list_trashed
@@ -77,11 +84,6 @@ class ArticlesController < ApplicationController
   def authorize
     return if @article.author_id == current_user.id || current_user.admin?
 
-    flash.alert = if action_name == 'show'
-                    "Cannot view other users' unpublished articles"
-                  else
-                    "Cannot edit or delete other users' articles"
-                  end
-    redirect_back_or_to root_path
+    redirect_back_or_to root_path, alert: 'Unauthorized'
   end
 end
