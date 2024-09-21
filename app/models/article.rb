@@ -1,4 +1,6 @@
 class Article < ApplicationRecord
+  include Discard::Model
+
   belongs_to :author, class_name: 'User', inverse_of: :articles, counter_cache: true
 
   has_many :comments, -> { order(created_at: :desc) }, inverse_of: :article, dependent: :destroy

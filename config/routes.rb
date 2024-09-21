@@ -9,6 +9,10 @@ Rails.application.routes.draw do
   get 'about' => 'pages#about'
 
   resources :articles do
+    collection do
+      get 'trashed', action: :list_trashed
+    end
+
     resources :comments, only: %i[create destroy]
   end
 

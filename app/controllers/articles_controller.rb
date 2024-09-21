@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   include Pagy::Backend
 
-  before_action :require_login, only: %i[new edit create update destroy]
+  before_action :require_login, only: %i[new edit create update destroy list_trashed]
   before_action :set_article, only: %i[show edit update destroy]
   before_action :authorize, only: %i[edit update destroy]
 
@@ -51,6 +51,17 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy!
     redirect_to current_user, status: :see_other, notice: 'Article deleted'
+  end
+
+  def list_trashed
+    articles = current_user.articles
+                           .preload(:author, :categories)
+                           .discarded
+                           .order(discarded_at: :desc)
+
+    @pagy, @articles = pagy(
+      current_user.admin? ? articles.unscope(where: :author_id) : articles
+    )
   end
 
   private

@@ -4,6 +4,7 @@
 
 <% if logged_in? && (@user == current_user || current_user.admin?) %>
   <p>
+    <%= link_to 'Trash', trashed_articles_path %> |
     <%= link_to 'Edit profile', edit_user_path(@user) %> |
     <%= link_to 'Delete account', @user, data: {
       turbo_method: :delete,
