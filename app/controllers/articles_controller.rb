@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
   def index
     @pagy, @articles = pagy(
       Article.preload(:author, :categories)
+             .kept
              .published
              .order(published_at: :desc)
     )

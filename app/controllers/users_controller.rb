@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    articles = @user.articles.preload(:categories)
+    articles = @user.articles.preload(:categories).kept
 
     @pagy, @articles = pagy(
       if logged_in? && (@user == current_user || current_user.admin?)

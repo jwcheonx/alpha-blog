@@ -12,6 +12,7 @@ class CategoriesController < ApplicationController
     @pagy, @articles = pagy(
       @category.articles
                .preload(:author, :categories)
+               .kept
                .published
                .order(published_at: :desc)
     )
