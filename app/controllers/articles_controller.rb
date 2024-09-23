@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    unless @article.published?
+    if @article.discarded? || !@article.published?
       require_login and return
       authorize and return
     end
