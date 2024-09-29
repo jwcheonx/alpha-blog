@@ -1,4 +1,5 @@
 require_relative 'spec_helper'
+require_relative 'support/factory_bot'
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
