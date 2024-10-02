@@ -1,24 +1,10 @@
-# README
+# Alpha Blog
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+An alternative implementation of the "Alpha Blog" project from [The Complete Ruby on Rails Developer Course](https://www.udemy.com/course/the-complete-ruby-on-rails-developer-course/)
 
-Things you may want to cover:
+## Highlights
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Users can decide whether and when to publish an article
+- Soft-deletion of articles
+- N+1 queries fixed
+- Proper authorization
